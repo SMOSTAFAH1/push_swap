@@ -35,12 +35,15 @@ void	*free_matrix(char **matrix)
 	int	i;
 
 	i = 0;
-	if (!matrix || !matrix[0])
+	if (!matrix)
 		return (NULL);
-	while (matrix[i])
+	if (matrix[0])
 	{
-		free(matrix[i]);
-		i++;
+		while (matrix[i])
+		{
+			free(matrix[i]);
+			i++;
+		}
 	}
 	free(matrix);
 	return (NULL);

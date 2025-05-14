@@ -113,7 +113,7 @@ int	main(int argc, char **argv)
 	stack_a = parse_numbers(argc, argv);
 	stack_b = NULL;
 	if (!stack_a)
-		return (1);
+		return (print_error());
 	if (has_repeated(&stack_a))
 		return (ft_lstclear(&stack_a), print_error());
 	if (is_sorted(&stack_a))
