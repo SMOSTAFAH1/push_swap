@@ -109,7 +109,7 @@ int	main(int argc, char **argv)
 	unsigned int	size;
 
 	if (argc < 2 || !argv[1][0])
-		return (1);
+		return (print_error());
 	stack_a = parse_numbers(argc, argv);
 	stack_b = NULL;
 	if (!stack_a)

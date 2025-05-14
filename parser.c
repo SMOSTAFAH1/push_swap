@@ -77,8 +77,8 @@ t_list	*parse_numbers(int argc, char **argv)
 	t_list		*new_node;
 
 	num_matrix = get_input_as_char_matrix(argc, argv);
-	if (!num_matrix)
-		return (NULL);
+	if (!num_matrix || !num_matrix[0])
+		return (free_matrix(num_matrix));
 	i = get_matrix_rows(num_matrix) - 1;
 	stack = create_stack_root(num_matrix, i--);
 	if (!stack)
