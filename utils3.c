@@ -60,24 +60,42 @@ char	*ft_strdup(const char *s1)
 	return (res);
 }
 
-void	ft_bzero(void *s, size_t n)
+int	count_rotations(t_list **stack, unsigned int index)
 {
-	size_t	i;
+	t_list	*original;
+	int		res;
+	int		flag;
 
-	i = -1;
-	while (++i < n)
-		((char *)s)[i] = '\0';
+	res = 0;
+	flag = 0;
+	if (!*stack)
+		return (0);
+	original = *stack;
+	while (*stack && (*stack)->next && !flag)
+	{
+		if ((*stack)->index == index)
+			flag = 1;
+		else
+			res++;
+		*stack = (*stack)->next;
+	}
+	*stack = original;
+	return (res);
 }
 
-void	*ft_calloc(size_t count, size_t size)
+void	ft_lstclear(t_list **lst)
 {
-	size_t			tam;
-	unsigned char	*res;
+	t_list	*aux;
 
-	tam = size * count;
-	res = malloc((int)tam);
-	if (res == NULL)
-		return (NULL);
-	ft_bzero(res, tam);
-	return (res);
+	if (*lst)
+	{
+		while (*lst)
+		{
+			aux = (*lst)->next;
+			if (*lst)
+				free(*lst);
+			*lst = aux;
+		}
+		*lst = NULL;
+	}
 }

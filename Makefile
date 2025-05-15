@@ -1,5 +1,5 @@
 NAME    := push_swap
-SRC     := main.c parser.c utils.c utils2.c utils3.c utils4.c utils5.c movements.c sort.c
+SRC     := main.c parser.c utils.c utils2.c utils3.c utils4.c movements.c sort.c
 OBJ     := $(SRC:.c=.o)
 
 CC      := cc

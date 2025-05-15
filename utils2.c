@@ -21,71 +21,6 @@ int	ft_strlen(const char *s)
 	return (res);
 }
 
-char	*extract_line_from_stash(char *stash, int bytes_read)
-{
-	char	*res;
-	int		tam;
-	int		i;
-
-	if (!stash)
-		return (NULL);
-	if (bytes_read)
-		tam = ft_strchr(stash, '\n') - stash + 1;
-	else
-		tam = ft_strlen(stash);
-	if (ft_strlen(stash) == 0)
-		return (NULL);
-	res = (char *) malloc(tam + 1);
-	if (!res)
-		return (NULL);
-	i = 0;
-	while (i < tam)
-	{
-		res[i] = *stash;
-		i++;
-		stash++;
-	}
-	res[tam] = '\0';
-	return (res);
-}
-
-char	*delete_line_from_stash(char *stash, int bytes_read)
-{
-	char	*res;
-	char	*remnants;
-	int		tam;
-
-	if (!stash)
-		return (NULL);
-	if (bytes_read)
-		remnants = ft_strchr(stash, '\n') + 1;
-	else
-		remnants = stash;
-	tam = ft_strlen(remnants);
-	if (tam == 0)
-	{
-		free(stash);
-		return (NULL);
-	}
-	res = (char *) malloc(tam + 1);
-	if (!res)
-		return (NULL);
-	ft_strlcpy(res, remnants, tam + 1);
-	free(stash);
-	return (res);
-}
-
-int	read_into_buffer(int fd, char *buffer)
-{
-	int	bytes_read;
-
-	bytes_read = read(fd, buffer, BUFFER_SIZE);
-	if (bytes_read < 0)
-		return (bytes_read);
-	buffer[bytes_read] = '\0';
-	return (bytes_read);
-}
-
 int	ft_lstsize(t_list *lst)
 {
 	int	i;
@@ -99,4 +34,50 @@ int	ft_lstsize(t_list *lst)
 		lst = lst->next;
 	}
 	return (i);
+}
+
+long int	ft_atoi(const char *nptr)
+{
+	long int	res;
+	int			i;
+	int			sign;
+
+	if (!nptr)
+		return (0);
+	sign = 1;
+	i = 0;
+	res = 0;
+	while (nptr[i] == '\t' || nptr[i] == '\n' || nptr[i] == ' ')
+		i++;
+	if (nptr[i] == '-')
+		sign = -1 + 0 * i++;
+	else if (nptr[i] == '+')
+		i++;
+	while (nptr[i] >= '0' && nptr[i] <= '9')
+	{
+		res = res * 10 + (nptr[i] - '0');
+		i++;
+	}
+	if (nptr[i] == '\0')
+		return (res * sign);
+	return (0);
+}
+
+t_list	*ft_lstnew(int content)
+{
+	t_list	*res;
+
+	res = (t_list *) malloc(sizeof(t_list));
+	if (!res)
+		return (NULL);
+	res->content = content;
+	res->index = UINT_MAX;
+	res->next = NULL;
+	return (res);
+}
+
+void	ft_lstadd_front(t_list **lst, t_list *new)
+{
+	new->next = *lst;
+	*lst = new;
 }

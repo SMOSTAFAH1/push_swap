@@ -54,8 +54,6 @@ int				ft_strlen(const char *s);
 void			copy_string_from_index(const char *src, char *dst, int i);
 size_t			ft_strlcpy(char *dst, const char *src, size_t dstsize);
 char			*ft_strdup(const char *s1);
-void			ft_bzero(void *s, size_t n);
-void			*ft_calloc(size_t count, size_t size);
 char			*ft_strjoin(char const *s1, char const *s2);
 char			**ft_split(char const *s, char c);
 int				count_words(char const *s, char c);
@@ -64,9 +62,5 @@ t_list			*ft_lstnew(int content);
 void			ft_lstadd_front(t_list **lst, t_list *new);
 void			ft_lstclear(t_list **lst);
 int				ft_lstsize(t_list *lst);
-char			*ft_strchr(const char *s, int c);
-char			*extract_line_from_stash(char *stash, int bytes_read);
-char			*delete_line_from_stash(char *stash, int bytes_read);
-int				read_into_buffer(int fd, char *buffer);
 
 #endif
